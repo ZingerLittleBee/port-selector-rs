@@ -2,6 +2,13 @@
 name = "port-selector-rs"
 version = "0.1.0"
 edition = "2021"
+categories = ["accessibility"]
+keywords = ["port", "check", "free", "select"]
+homepage = "https://github.com/ZingerLittleBee/port-selector-rs"
+repository = "https://github.com/ZingerLittleBee/port-selector-rs"
+description = "port availability checking and port filtering based on conditions"
+readme = "README.md"
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
