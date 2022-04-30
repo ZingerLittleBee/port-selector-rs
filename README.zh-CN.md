@@ -42,7 +42,7 @@ fn main() {
 ## Goods
 type -> [Port](#port) · [Selector](#selector) 
 
-fn -> [is_free_tcp](#isfreetcp) · [is_free_udp](#isfreeudp) · [is_free](#isfree) · [random_free_tcp_port](#randomfreetcpport) · [random_free_udp_port](#randomfreeudpport) · [random_free_port](#randomfreeport) · [select_from_given_port](#selectfromgivenport) · [select_free_port](#selectfreeport)
+fn -> [is_free_tcp](#is_free_tcp) · [is_free_udp](#is_free_udp) · [is_free](#is_free) · [random_free_tcp_port](#random_free_tcp_port) · [random_free_udp_port](#random_free_udp_port) · [random_free_port](#random_free_port) · [select_from_given_port](#select_from_given_port) · [select_free_port](#select_free_port)
 
 
 ## Documentation
