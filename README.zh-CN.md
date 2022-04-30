@@ -57,14 +57,14 @@ pub type Port = u16;
 ```rust
 pub struct Selector {
     // 是否检查端口在 tcp 上可用, 默认值 true
-    check_tcp: bool,
+    pub check_tcp: bool,
     // 是否检查端口在 udp 上可用, 默认值 true
-    check_udp: bool,
+    pub check_udp: bool,
     // 设置生成的端口范围, 默认值 (0, 65525)
-    port_range: (u16, u16),
+    pub port_range: (u16, u16),
     // 最大随机次数, 默认值 100
     // 如果在最大随机次数的循环之内都没有找到可用端口号, 则返回 None
-    max_random_times: u16,
+    pub max_random_times: u16,
 }
 ```
 

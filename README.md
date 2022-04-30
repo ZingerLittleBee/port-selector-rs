@@ -58,15 +58,15 @@ The `select_free_port` requires a structure passed in
 pub struct Selector {
     // Check whether the port is available on TCP.
     // The default value is true.
-    check_tcp: bool,
+    pub check_tcp: bool,
     // Check whether the port is available on UDP.
     // The default value is true.
-    check_udp: bool,
+    pub check_udp: bool,
     // Set the range of generated ports, default (0, 65525)
-    port_range: (u16, u16),
+    pub port_range: (u16, u16),
     // Maximum number of random times. Default value: 100
     // If no available port number is found within the maximum random number of loops, None is returned
-    max_random_times: u16,
+    pub max_random_times: u16,
 }
 ```
 
