@@ -6,8 +6,6 @@ on:
             - '*'
     workflow_dispatch:
 
-name: Publish
-
 jobs:
     publish:
         name: Publish
