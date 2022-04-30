@@ -7,10 +7,10 @@ pub type Port = u16;
 
 #[derive(Copy, Clone)]
 pub struct Selector {
-    check_tcp: bool,
-    check_udp: bool,
-    port_range: (u16, u16),
-    max_random_times: u16,
+    pub check_tcp: bool,
+    pub check_udp: bool,
+    pub port_range: (u16, u16),
+    pub max_random_times: u16,
 }
 
 impl Default for Selector {
