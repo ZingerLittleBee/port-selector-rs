@@ -34,7 +34,7 @@ fn test_bind_udp<A: ToSocketAddrs>(addr: A) -> Option<Port> {
     Some(UdpSocket::bind(addr).ok()?.local_addr().ok()?.port())
 }
 
-/// Check if a port is free on TCP
+/// Check whether the port is not used on TCP
 pub fn is_free_tcp(port: Port) -> bool {
     let ipv4 = SocketAddrV4::new(Ipv4Addr::UNSPECIFIED, port);
     let ipv6 = SocketAddrV6::new(Ipv6Addr::UNSPECIFIED, port, 0, 0);
@@ -42,6 +42,7 @@ pub fn is_free_tcp(port: Port) -> bool {
     test_bind_tcp(ipv6).is_some() && test_bind_tcp(ipv4).is_some()
 }
 
+/// Check whether the port is not used on UDP
 pub fn is_free_udp(port: Port) -> bool {
     let ipv4 = SocketAddrV4::new(Ipv4Addr::UNSPECIFIED, port);
     let ipv6 = SocketAddrV6::new(Ipv6Addr::UNSPECIFIED, port, 0, 0);
@@ -49,12 +50,12 @@ pub fn is_free_udp(port: Port) -> bool {
     test_bind_udp(ipv6).is_some() && test_bind_udp(ipv4).is_some()
 }
 
-/// Check if a port is free on both TCP and UDP
+/// Check whether the port is not used on TCP and UDP
 pub fn is_free(port: Port) -> bool {
     is_free_tcp(port) && is_free_udp(port)
 }
 
-/// Asks the OS for a free tcp port
+/// The system randomly assigns available TCP ports
 pub fn random_free_tcp_port() -> Option<Port> {
     let ipv4 = SocketAddrV4::new(Ipv4Addr::UNSPECIFIED, 0);
     let ipv6 = SocketAddrV6::new(Ipv6Addr::UNSPECIFIED, 0, 0, 0);
@@ -62,7 +63,7 @@ pub fn random_free_tcp_port() -> Option<Port> {
     test_bind_tcp(ipv6).or_else(|| test_bind_tcp(ipv4))
 }
 
-// Asks the OS for a free udp port
+/// The system randomly assigns available UDP ports
 pub fn random_free_udp_port() -> Option<Port> {
     let ipv4 = SocketAddrV4::new(Ipv4Addr::UNSPECIFIED, 0);
     let ipv6 = SocketAddrV6::new(Ipv6Addr::UNSPECIFIED, 0, 0, 0);
@@ -70,7 +71,7 @@ pub fn random_free_udp_port() -> Option<Port> {
     test_bind_udp(ipv6).or_else(|| test_bind_udp(ipv4))
 }
 
-// Asks the OS for a free port
+/// The system randomly assigns available TCP and UDP ports
 pub fn random_free_port() -> Option<Port> {
     loop {
         let free_tcp_port = random_free_tcp_port();
@@ -80,7 +81,8 @@ pub fn random_free_port() -> Option<Port> {
     }
 }
 
-// Select free port from given port, if not given_port++
+/// Check from `given_port` and return the first available port
+/// Return if `given_port` is available; Otherwise `given_port += given_port` until the port is available
 pub fn select_from_given_port(given_port: Port) -> Option<Port> {
     let mut port = given_port;
     loop {
@@ -92,7 +94,7 @@ pub fn select_from_given_port(given_port: Port) -> Option<Port> {
     }
 }
 
-// Select an available port that is meet the conditions
+/// Gets a matching port based on the `Selector` parameter constraint
 pub fn select_free_port(selector: Selector) -> Option<Port> {
     let mut rng = rand::thread_rng();
     let (from, to) = selector.port_range;
