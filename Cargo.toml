@@ -1,6 +1,6 @@
 [package]
-name = "port-selector-rs"
-version = "0.1.0"
+name = "port-selector"
+version = "0.1.1"
 edition = "2021"
 categories = ["accessibility"]
 keywords = ["port", "check", "free", "select"]
