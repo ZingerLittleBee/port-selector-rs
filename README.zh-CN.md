@@ -1,4 +1,4 @@
-Language : 🇺🇸 English | [🇨🇳 简体中文](./README.zh-CN.md)
+Language : [🇺🇸 English](./README.md) | 🇨🇳 简体中文
 
 <p align="center"><font size="7px">port-selector</font></p>
 <p align="center">
@@ -16,18 +16,18 @@ Language : 🇺🇸 English | [🇨🇳 简体中文](./README.zh-CN.md)
 
 ## Overview
 
-port-selector is a rust library that mainly provides port availability checking and port filtering based on conditions.
+port-selector 是一个 rust 的库, 主要提供端口可用性检查和根据条件筛选端口的功能.
 
 ## Install
-1. Get the latest version -> https://crates.io/crates/port-selector
+1. 获取最新版本 -> https://crates.io/crates/port-selector
 
-2. Add the dependent
+2. 添加依赖
 ```toml
 [dependencies]
 port-selector = "x.x.x"
 ```
 
-3. use
+3. 使用
 ```rust
 use port_selector::{is_free, Port};
 
@@ -45,79 +45,76 @@ fn -> [is_free_tcp](#isfreetcp) · [is_free_udp](#isfreeudp) · [is_free](#isfre
 
 ## Documentation
 ### Port
-`u16` type alias
+`u16` 类型别名
 ```rust
 pub type Port = u16;
 ```
 
 ### Selector
-The `select_free_port` requires a structure passed in
+`select_free_port` 函数需要传入的结构体
 ```rust
 pub struct Selector {
-    // Check whether the port is available on TCP.
-    // The default value is true.
+    // 是否检查端口在 tcp 上可用, 默认值 true
     check_tcp: bool,
-    // Check whether the port is available on UDP.
-    // The default value is true.
+    // 是否检查端口在 udp 上可用, 默认值 true
     check_udp: bool,
-    // Set the range of generated ports, default (0, 65525)
+    // 设置生成的端口范围, 默认值 (0, 65525)
     port_range: (u16, u16),
-    // Maximum number of random times. Default value: 100
-    // If no available port number is found within the maximum random number of loops, None is returned
+    // 最大随机次数, 默认值 100
+    // 如果在最大随机次数的循环之内都没有找到可用端口号, 则返回 None
     max_random_times: u16,
 }
 ```
 
 ### `is_free_tcp`
-Check whether the port is not used on TCP
+检查端口在 tcp 上是否未使用
 ```rust
 pub fn is_free_udp(port: Port) -> bool
 ```
 
 ### `is_free_udp`
-Check whether the port is not used on UDP
+检查端口在 udp 上是否未使用
 ```rust
 pub fn is_free_udp(port: Port) -> bool
 ```
 
 ### `is_free`
-Check whether the port is not used on TCP and UDP
+检查端口在 tcp && udp 上是否未使用
 ```rust
 pub fn is_free(port: Port) -> bool
 ```
 
 ### `random_free_tcp_port`
-The system randomly assigns available TCP ports
+由系统随机分配可用 tcp 端口
 ```rust
 pub fn random_free_tcp_port() -> Option<Port>
 ```
 
 ### `random_free_udp_port`
-The system randomly assigns available UDP ports
+由系统随机分配可用 udp 端口
 ```rust
 pub fn random_free_udp_port() -> Option<Port>
 ```
 
 ### `random_free_port`
-The system randomly assigns available TCP and UDP ports
+由系统随机分配可用 tcp && udp 端口
 ```rust
 pub fn random_free_port() -> Option<Port>
 ```
 
 ### `select_from_given_port`
-Check from `given_port` and return the first available port
+从 `given_port` 开始检查, 返回第一个可用端口
 
-Return if `given_port` is available; Otherwise `given_port += given_port` until the port is available
+如果 `given_port` 可用, 则返回; 否则 `given_port += given_port`, 直到端口可用
 ```rust
 pub fn select_from_given_port(given_port: Port) -> Option<Port>
 ```
 
 ### `select_free_port`
-Gets a matching port based on the `Selector` parameter constraint
+根据 `Selector` 参数约束获取一个满足条件的端口
 ```rust
 pub fn select_free_port(selector: Selector) -> Option<Port>
 ```
 
 ## Thanks
 [portpicker-rs](https://github.com/Dentosal/portpicker-rs)
-
