@@ -1,18 +1,20 @@
 Language : 🇺🇸 English | [🇨🇳 简体中文](./README.zh-CN.md)
 
-<p align="center"><font size="7px">port-selector</font></p>
-<p align="center">
-    <img alt="Crates.io" src="https://img.shields.io/crates/v/port-selector" />
-    <img alt="Crates.io" src="https://img.shields.io/crates/d/port-selector" />
-    <img alt="Last Commit" src="https://img.shields.io/github/last-commit/ZingerLittleBee/port-selector-rs" />
-</p>
-<p align="center">
-    <a alt="docs.rs" src="https://docs.rs/port-selector/0.1.1/port_selector/"><img src="https://img.shields.io/docsrs/port-selector" /></a>
-    <a src="https://github.com/ZingerLittleBee/port-selector-rs/actions" alt="GitHub Actions CI">
-        <img src="https://img.shields.io/github/workflow/status/ZingerLittleBee/port-selector-rs/Test%20CI" /></a>
-    <a src="./LICENSE">
-    <img alt="Crates.io" src="https://img.shields.io/crates/l/port-selector" /></a>
-</p>
+<h1 align="center">port-selector</h1>
+<div align="center">
+    
+[![Build Status](https://img.shields.io/crates/v/port-selector)](https://crates.io/crates/port-selector)
+![Crates Downloads](https://img.shields.io/crates/d/port-selector)
+![Last Commit](https://img.shields.io/github/last-commit/ZingerLittleBee/port-selector-rs)
+    
+</div>
+<div align="center">
+    
+[![Docs](https://img.shields.io/docsrs/port-selector)](https://docs.rs/port-selector/0.1.1/port_selector/)
+[![GitHub Actions CI](https://img.shields.io/github/workflow/status/ZingerLittleBee/port-selector-rs/Test%20CI)](https://github.com/ZingerLittleBee/port-selector-rs/actions)
+[![LICENSE](https://img.shields.io/crates/l/port-selector)](./LICENSE)
+    
+</div>
 
 ## Overview
 
