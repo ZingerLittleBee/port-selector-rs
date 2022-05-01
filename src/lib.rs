@@ -5,7 +5,7 @@ use std::net::{
 
 pub type Port = u16;
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub struct Selector {
     pub check_tcp: bool,
     pub check_udp: bool,
