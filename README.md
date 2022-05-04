@@ -109,7 +109,7 @@ pub fn random_free_port() -> Option<Port>
 ### `select_from_given_port`
 Check from `given_port` and return the first available port
 
-Return if `given_port` is available; Otherwise `given_port += given_port` until the port is available
+Return if `given_port` is available; Otherwise `given_port += 1` until the port is available
 ```rust
 pub fn select_from_given_port(given_port: Port) -> Option<Port>
 ```

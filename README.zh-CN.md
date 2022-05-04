@@ -107,7 +107,7 @@ pub fn random_free_port() -> Option<Port>
 ### `select_from_given_port`
 从 `given_port` 开始检查, 返回第一个可用端口
 
-如果 `given_port` 可用, 则返回; 否则 `given_port += given_port`, 直到端口可用
+如果 `given_port` 可用, 则返回; 否则 `given_port += 1`, 直到端口可用
 ```rust
 pub fn select_from_given_port(given_port: Port) -> Option<Port>
 ```
