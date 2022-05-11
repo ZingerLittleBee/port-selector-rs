@@ -77,8 +77,10 @@ pub fn random_free_udp_port() -> Option<Port> {
 pub fn random_free_port() -> Option<Port> {
     loop {
         let free_tcp_port = random_free_tcp_port();
-        if free_tcp_port.map(|f| is_free_udp(f))? {
-            break free_tcp_port;
+        if free_tcp_port.is_some() {
+            if is_free_udp(free_tcp_port.unwrap()) {
+                break free_tcp_port;
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ use crate::{is_free, is_free_tcp, is_free_udp, random_free_port, Port};
 
 /// Run TCP Server to take up port on TCP
 fn set_up_tcp_listener(port: Option<Port>) -> Port {
-    let port = port.unwrap_or_else(|| 0);
+    let port = port.unwrap_or(0);
     if port > 0 && !is_free_tcp(port) {
         return port;
     }
@@ -31,7 +31,7 @@ pub fn random_take_up_tcp_port() -> Port {
 
 /// Run UDP Server to take up port on UDP
 fn set_up_udp_listener(port: Option<Port>) -> Port {
-    let port = port.unwrap_or_else(|| 0);
+    let port = port.unwrap_or(0);
     if port > 0 && !is_free_udp(port) {
         return port;
     }
@@ -63,7 +63,7 @@ pub fn take_up_port(port: Port) -> bool {
     if is_free_udp(port) {
         take_up_udp_port(port);
     }
-    return !is_free(port);
+    !is_free(port)
 }
 
 /// Take up port randomly on TCP && UDP
