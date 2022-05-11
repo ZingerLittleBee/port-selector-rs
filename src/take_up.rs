@@ -5,6 +5,7 @@ use std::{
 
 use crate::{is_free, is_free_tcp, is_free_udp, random_free_port, Port};
 
+/// Run TCP Server to take up port on TCP
 fn set_up_tcp_listener(port: Option<Port>) -> Port {
     let port = port.unwrap_or_else(|| 0);
     if port > 0 && !is_free_tcp(port) {
@@ -18,14 +19,17 @@ fn set_up_tcp_listener(port: Option<Port>) -> Port {
     port
 }
 
+/// Take up given port on TCP
 pub fn take_up_tcp_port(port: Port) -> bool {
     !is_free_tcp(set_up_tcp_listener(Some(port)))
 }
 
+/// Take up port randomly on TCP
 pub fn random_take_up_tcp_port() -> Port {
     set_up_tcp_listener(None)
 }
 
+/// Run UDP Server to take up port on UDP
 fn set_up_udp_listener(port: Option<Port>) -> Port {
     let port = port.unwrap_or_else(|| 0);
     if port > 0 && !is_free_udp(port) {
@@ -41,14 +45,17 @@ fn set_up_udp_listener(port: Option<Port>) -> Port {
     port
 }
 
+/// Take up given port on UDP
 pub fn take_up_udp_port(port: Port) -> bool {
     !is_free_udp(set_up_udp_listener(Some(port)))
 }
 
+/// Take up port randomly on UDP
 pub fn random_take_up_udp_port() -> Port {
     set_up_udp_listener(None)
 }
 
+/// Take up port randomly on TCP && UDP
 pub fn take_up_port(port: Port) -> bool {
     if is_free_tcp(port) {
         take_up_tcp_port(port);
@@ -59,6 +66,7 @@ pub fn take_up_port(port: Port) -> bool {
     return !is_free(port);
 }
 
+/// Take up port randomly on TCP && UDP
 pub fn random_take_up_port() -> Port {
     loop {
         let free_port = random_free_port().expect("Fail to get free port");
