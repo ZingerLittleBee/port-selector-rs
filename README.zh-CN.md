@@ -2,31 +2,30 @@ Language : [🇺🇸 English](./README.md) | 🇨🇳 简体中文
 
 <h1 align="center">port-selector</h1>
 <div align="center">
-    
+
 [![Build Status](https://img.shields.io/crates/v/port-selector)](https://crates.io/crates/port-selector)
 ![Crates Downloads](https://img.shields.io/crates/d/port-selector)
 ![Last Commit](https://img.shields.io/github/last-commit/ZingerLittleBee/port-selector-rs)
-    
+
 </div>
 <div align="center">
-    
+
 [![Docs](https://img.shields.io/docsrs/port-selector)](https://docs.rs/port-selector/0.1.1/port_selector/)
 [![GitHub Actions CI](https://img.shields.io/github/workflow/status/ZingerLittleBee/port-selector-rs/Test%20CI)](https://github.com/ZingerLittleBee/port-selector-rs/actions)
 [![LICENSE](https://img.shields.io/crates/l/port-selector)](./LICENSE)
-    
+
 </div>
 
 ## Overview
+port-selector 是一个 rust 的库, 提供**端口可用性检查**、**条件筛选端口**和**占用指定端口**的功能.
 
-port-selector 是一个 rust 的库, 主要提供端口可用性检查和根据条件筛选端口的功能.
-
-## Install
+## Installation
 1. 获取最新版本 -> https://crates.io/crates/port-selector
 
 2. 添加依赖
 ```toml
 [dependencies]
-port-selector = "x.x.x"
+port-selector = "0.1.5"
 ```
 
 3. 使用
@@ -40,9 +39,9 @@ fn main() {
 ```
 
 ## Goods
-type -> [Port](#port) · [Selector](#selector) 
+type -> [Port](#port) · [Selector](#selector)
 
-fn -> [is_free_tcp](#is_free_tcp) · [is_free_udp](#is_free_udp) · [is_free](#is_free) · [random_free_tcp_port](#random_free_tcp_port) · [random_free_udp_port](#random_free_udp_port) · [random_free_port](#random_free_port) · [select_from_given_port](#select_from_given_port) · [select_free_port](#select_free_port)
+fn -> [is_free_tcp](#is_free_tcp) · [is_free_udp](#is_free_udp) · [is_free](#is_free) · [random_free_tcp_port](#random_free_tcp_port) · [random_free_udp_port](#random_free_udp_port) · [random_free_port](#random_free_port) · [select_from_given_port](#select_from_given_port) · [select_free_port](#select_free_port) · [take_up_tcp_port](#take_up_tcp_port) · [take_up_udp_port](#take_up_udp_port) · [take_up_port](#take_up_port) · [random_take_up_tcp_port](#random_take_up_tcp_port) · [random_take_up_udp_port](#random_take_up_udp_port) · [random_take_up_port](#random_take_up_port)
 
 
 ## Documentation
@@ -116,6 +115,42 @@ pub fn select_from_given_port(given_port: Port) -> Option<Port>
 根据 `Selector` 参数约束获取一个满足条件的端口
 ```rust
 pub fn select_free_port(selector: Selector) -> Option<Port>
+```
+
+### `take_up_tcp_port`
+在 tcp 上占用端口
+```rust
+fn take_up_tcp_port(port: Port) -> bool
+```
+
+### `take_up_udp_port`
+在 udp 上占用端口
+```rust
+fn take_up_udp_port(port: Port) -> bool
+```
+
+### `take_up_port`
+在 tcp && udp 上占用端口
+```rust
+fn take_up_port(port: Port) -> bool
+```
+
+### `random_take_up_tcp_port`
+由系统随机占用 tcp 端口
+```rust
+fn random_take_up_tcp_port() -> Port
+```
+
+### `random_take_up_udp_port`
+由系统随机占用 udp 端口
+```rust
+fn random_take_up_udp_port() -> Port
+```
+
+### `random_take_up_port`
+由系统随机占用 tcp && udp 端口
+```rust
+fn random_take_up_port() -> Port
 ```
 
 ## Thanks
