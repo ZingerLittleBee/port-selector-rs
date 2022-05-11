@@ -1,3 +1,5 @@
+mod take_up;
+
 use rand::prelude::*;
 use std::net::{
     Ipv4Addr, Ipv6Addr, SocketAddrV4, SocketAddrV6, TcpListener, ToSocketAddrs, UdpSocket,
@@ -126,59 +128,63 @@ pub fn select_free_port(selector: Selector) -> Option<Port> {
 
 #[cfg(test)]
 mod tests {
+
     use crate::{
         is_free, is_free_tcp, is_free_udp, random_free_port, random_free_tcp_port,
-        random_free_udp_port, select_free_port, select_from_given_port, test_bind_tcp,
-        test_bind_udp, Selector,
+        random_free_udp_port, select_free_port, select_from_given_port,
+        take_up::{random_take_up_port, random_take_up_tcp_port, random_take_up_udp_port},
+        test_bind_tcp, test_bind_udp, Selector,
     };
-    use std::net::{Ipv4Addr, SocketAddrV4, TcpListener, UdpSocket};
+    use std::net::{Ipv4Addr, Ipv6Addr, SocketAddrV4, SocketAddrV6};
 
     #[test]
     fn test_is_free() {
-        let listener = TcpListener::bind(SocketAddrV4::new(Ipv4Addr::UNSPECIFIED, 0)).unwrap();
-        let port = listener.local_addr().ok().unwrap().port();
-        assert_eq!(is_free(port), false);
-        assert_eq!(is_free_tcp(port), false);
-        assert_eq!(is_free_udp(port), true);
+        let used_port = random_take_up_port();
+        assert!(!is_free(used_port));
+        let free_port = random_free_port();
+        assert!(is_free(free_port.unwrap()));
     }
 
     #[test]
     fn test_is_free_tcp() {
-        let listener = TcpListener::bind(SocketAddrV4::new(Ipv4Addr::UNSPECIFIED, 0)).unwrap();
-        let port = listener.local_addr().ok().unwrap().port();
-        assert_eq!(is_free(port), false);
-        assert_eq!(is_free_tcp(port), false);
+        let used_tcp_port = random_take_up_tcp_port();
+        assert!(!is_free_tcp(used_tcp_port));
+        let free_port = random_free_tcp_port();
+        assert!(is_free_tcp(free_port.unwrap()));
     }
 
     #[test]
     fn test_is_free_udp() {
-        let listener = UdpSocket::bind(SocketAddrV4::new(Ipv4Addr::UNSPECIFIED, 0)).unwrap();
-        let port = listener.local_addr().ok().unwrap().port();
-        assert_eq!(is_free(port), false);
-        assert_eq!(is_free_udp(port), false);
+        let used_tcp_port = random_take_up_udp_port();
+        assert!(!is_free_udp(used_tcp_port));
+        let free_port = random_free_udp_port();
+        assert!(is_free_udp(free_port.unwrap()));
     }
 
     #[test]
-    fn test_ask_free_tcp_port() {
-        assert_eq!(random_free_tcp_port().is_some(), true);
+    fn test_free_tcp_port() {
+        let free_tcp_port = random_free_tcp_port();
+        assert!(free_tcp_port.is_some());
+        assert!(is_free_tcp(free_tcp_port.unwrap()));
     }
 
     #[test]
-    fn test_ask_free_udp_port() {
-        assert_eq!(random_free_udp_port().is_some(), true);
+    fn test_free_udp_port() {
+        let free_udp_port = random_free_udp_port();
+        assert!(free_udp_port.is_some());
+        assert!(is_free_udp(free_udp_port.unwrap()));
     }
 
     #[test]
     fn test_pick_unused_port() {
-        let listener = UdpSocket::bind(SocketAddrV4::new(Ipv4Addr::UNSPECIFIED, 0)).unwrap();
-        let port = listener.local_addr().ok().unwrap().port();
+        let used_port = random_take_up_port();
         let selector_fail: Selector = Selector {
-            port_range: (port, port + 1),
+            port_range: (used_port, used_port + 1),
             ..Default::default()
         };
         let port = select_free_port(selector_fail);
         println!("selector_fail, port: {:#?}", &port);
-        assert_eq!(port.is_some(), false);
+        assert!(!port.is_some());
 
         let selector: Selector = Selector {
             port_range: (50000, 60000),
@@ -187,45 +193,46 @@ mod tests {
         for i in 0..100 {
             let port = select_free_port(selector);
             println!("index: {}, port: {:#?}", i, &port.unwrap());
-            assert_eq!(&port.unwrap() >= &50000 && &port.unwrap() <= &60000, true);
-            assert_eq!(port.is_some(), true);
+            assert!(&port.unwrap() >= &50000 && &port.unwrap() <= &60000);
+            assert!(port.is_some());
         }
     }
 
     #[test]
     fn test_test_bind_tcp() {
-        assert_eq!(
-            test_bind_tcp(SocketAddrV4::new(Ipv4Addr::UNSPECIFIED, 0)).is_some(),
-            true
-        );
+        assert!(test_bind_tcp(SocketAddrV4::new(Ipv4Addr::UNSPECIFIED, 0)).is_some());
+        assert!(test_bind_tcp(SocketAddrV6::new(Ipv6Addr::UNSPECIFIED, 0, 0, 0)).is_some());
     }
 
     #[test]
     fn test_test_bind_udp() {
-        assert_eq!(
-            test_bind_udp(SocketAddrV4::new(Ipv4Addr::UNSPECIFIED, 0)).is_some(),
-            true
-        );
+        assert!(test_bind_udp(SocketAddrV4::new(Ipv4Addr::UNSPECIFIED, 0)).is_some());
+        assert!(test_bind_udp(SocketAddrV6::new(Ipv6Addr::UNSPECIFIED, 0, 0, 0)).is_some());
     }
 
     #[test]
     fn test_random_free_port() {
         let port = random_free_port().unwrap();
         println!("port: {}", &port);
-        assert_eq!(is_free_tcp(port) && is_free_udp(port), true);
-        assert_eq!(random_free_port().is_some(), true);
+        assert!(is_free_tcp(port) && is_free_udp(port));
+        assert!(random_free_port().is_some());
     }
 
     #[test]
     fn test_select_from_given_port() {
         let port = select_from_given_port(30000).unwrap();
         println!("port: {}", &port);
-        assert_eq!(is_free_tcp(port) && is_free_udp(port), true);
-        let listener = UdpSocket::bind(SocketAddrV4::new(Ipv4Addr::UNSPECIFIED, port)).unwrap();
-        let used_port = listener.local_addr().ok().unwrap().port();
+        assert!(is_free_tcp(port) && is_free_udp(port));
+        let mut used_port = random_take_up_port();
         println!("used_port: {}", &used_port);
         let new_port = select_from_given_port(used_port).unwrap();
         println!("new_port: {}", &new_port);
-        assert_eq!(new_port, used_port + 1);
+        let used_port = loop {
+            if is_free(used_port) {
+                break used_port;
+            }
+            used_port += 1;
+        };
+        assert_eq!(new_port, used_port);
     }
 }

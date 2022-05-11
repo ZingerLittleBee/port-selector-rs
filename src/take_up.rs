@@ -113,8 +113,8 @@ mod take_up_tests {
 
     #[test]
     fn test_random_take_up_tcp_port() {
-        let take_up_tcp_port = random_take_up_tcp_port();
-        assert_eq!(is_free_tcp(take_up_tcp_port), false);
+        let used_tcp_port = random_take_up_tcp_port();
+        assert_eq!(is_free_tcp(used_tcp_port), false);
     }
 
     #[test]
@@ -129,24 +129,24 @@ mod take_up_tests {
 
     #[test]
     fn test_random_take_up_udp_port() {
-        let take_up_udp_port = random_take_up_udp_port();
-        assert!(!is_free_udp(take_up_udp_port));
+        let used_udp_port = random_take_up_udp_port();
+        assert!(!is_free_udp(used_udp_port));
     }
 
     #[test]
     fn test_take_up_port() {
         let free_port = random_free_port();
         assert!(free_port.is_some());
-        let is_take_up_port = take_up_port(free_port.unwrap());
-        assert!(is_take_up_port);
+        let is_used_port = take_up_port(free_port.unwrap());
+        assert!(is_used_port);
         assert_eq!(is_free(free_port.unwrap()), false);
     }
 
     #[test]
     fn test_random_take_up_port() {
-        let take_up_port = random_take_up_port();
-        assert!(!is_free(take_up_port));
-        assert!(!is_free_tcp(take_up_port));
-        assert!(!is_free_udp(take_up_port));
+        let used_port = random_take_up_port();
+        assert!(!is_free(used_port));
+        assert!(!is_free_tcp(used_port));
+        assert!(!is_free_udp(used_port));
     }
 }
