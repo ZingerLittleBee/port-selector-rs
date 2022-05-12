@@ -31,17 +31,25 @@ port-selector = "0.1.6"
 3. use
 ```rust
 use port_selector::{is_free, Port};
+use port_selector::take_up::{random_take_up_port, take_up_port};
 
 fn main() {
+    // check
     let check_port: Port = 3000;
     println!("is_free({}) = {}", check_port, is_free(check_port));
+    // take up
+    let used_port = random_take_up_port();
+    println!("used_port: {}", used_port);
+    assert!(take_up_port(5000));
 }
 ```
 
 ## Goods
-type -> [Port](#port) · [Selector](#selector) 
+type -> [Port](#port) · [Selector](#selector)
 
-fn -> [is_free_tcp](#is_free_tcp) · [is_free_udp](#is_free_udp) · [is_free](#is_free) · [random_free_tcp_port](#random_free_tcp_port) · [random_free_udp_port](#random_free_udp_port) · [random_free_port](#random_free_port) · [select_from_given_port](#select_from_given_port) · [select_free_port](#select_free_port) · [take_up_tcp_port](#take_up_tcp_port) · [take_up_udp_port](#take_up_udp_port) · [take_up_port](#take_up_port) · [random_take_up_tcp_port](#random_take_up_tcp_port) · [random_take_up_udp_port](#random_take_up_udp_port) · [random_take_up_port](#random_take_up_port)
+fn -> [is_free_tcp](#is_free_tcp) · [is_free_udp](#is_free_udp) · [is_free](#is_free) · [random_free_tcp_port](#random_free_tcp_port) · [random_free_udp_port](#random_free_udp_port) · [random_free_port](#random_free_port) · [select_from_given_port](#select_from_given_port) · [select_free_port](#select_free_port)
+
+mod (`take_up`) -> [take_up_tcp_port](#take_up_tcp_port) · [take_up_udp_port](#take_up_udp_port) · [take_up_port](#take_up_port) · [random_take_up_tcp_port](#random_take_up_tcp_port) · [random_take_up_udp_port](#random_take_up_udp_port) · [random_take_up_port](#random_take_up_port)
 
 
 ## Documentation
@@ -119,6 +127,8 @@ Gets a matching port based on the `Selector` parameter constraint
 pub fn select_free_port(selector: Selector) -> Option<Port>
 ```
 
+----
+> The ports occupied by the `take_up` series of methods will be automatically released after the main function call ends. To release earlier, you can use [port-killer](https://github.com/ZingerLittleBee/port-killer-rs)
 ### `take_up_tcp_port`
 Occupy port on tcp
 ```rust

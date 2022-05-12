@@ -31,17 +31,25 @@ port-selector = "0.1.6"
 3. 使用
 ```rust
 use port_selector::{is_free, Port};
+use port_selector::take_up::{random_take_up_port, take_up_port};
 
 fn main() {
+    // check
     let check_port: Port = 3000;
     println!("is_free({}) = {}", check_port, is_free(check_port));
+    // take up
+    let used_port = random_take_up_port();
+    println!("used_port: {}", used_port);
+    assert!(take_up_port(5000));
 }
 ```
 
 ## Goods
 type -> [Port](#port) · [Selector](#selector)
 
-fn -> [is_free_tcp](#is_free_tcp) · [is_free_udp](#is_free_udp) · [is_free](#is_free) · [random_free_tcp_port](#random_free_tcp_port) · [random_free_udp_port](#random_free_udp_port) · [random_free_port](#random_free_port) · [select_from_given_port](#select_from_given_port) · [select_free_port](#select_free_port) · [take_up_tcp_port](#take_up_tcp_port) · [take_up_udp_port](#take_up_udp_port) · [take_up_port](#take_up_port) · [random_take_up_tcp_port](#random_take_up_tcp_port) · [random_take_up_udp_port](#random_take_up_udp_port) · [random_take_up_port](#random_take_up_port)
+fn -> [is_free_tcp](#is_free_tcp) · [is_free_udp](#is_free_udp) · [is_free](#is_free) · [random_free_tcp_port](#random_free_tcp_port) · [random_free_udp_port](#random_free_udp_port) · [random_free_port](#random_free_port) · [select_from_given_port](#select_from_given_port) · [select_free_port](#select_free_port)
+
+mod (`take_up`) -> [take_up_tcp_port](#take_up_tcp_port) · [take_up_udp_port](#take_up_udp_port) · [take_up_port](#take_up_port) · [random_take_up_tcp_port](#random_take_up_tcp_port) · [random_take_up_udp_port](#random_take_up_udp_port) · [random_take_up_port](#random_take_up_port)
 
 
 ## Documentation
@@ -116,7 +124,8 @@ pub fn select_from_given_port(given_port: Port) -> Option<Port>
 ```rust
 pub fn select_free_port(selector: Selector) -> Option<Port>
 ```
-
+----
+> `take_up` 系列方法占用的端口会在主函数调用结束之后自动释放. 如需提前释放, 可以使用 [port-killer](https://github.com/ZingerLittleBee/port-killer-rs)
 ### `take_up_tcp_port`
 在 tcp 上占用端口
 ```rust
