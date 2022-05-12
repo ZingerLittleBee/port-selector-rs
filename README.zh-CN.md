@@ -25,7 +25,7 @@ port-selector 是一个 rust 的库, 提供**端口可用性检查**、**条件�
 2. 添加依赖
 ```toml
 [dependencies]
-port-selector = "0.1.5"
+port-selector = "0.1.6"
 ```
 
 3. 使用

@@ -25,7 +25,7 @@ port-selector is a rust library that provides **port availability checking**, **
 2. Add the dependent
 ```toml
 [dependencies]
-port-selector = "0.1.5"
+port-selector = "0.1.6"
 ```
 
 3. use
