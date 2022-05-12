@@ -1,4 +1,4 @@
-mod take_up;
+pub mod take_up;
 
 use rand::prelude::*;
 use std::net::{
