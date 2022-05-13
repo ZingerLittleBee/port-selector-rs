@@ -125,7 +125,7 @@ pub fn select_from_given_port(given_port: Port) -> Option<Port>
 pub fn select_free_port(selector: Selector) -> Option<Port>
 ```
 ----
-> `take_up` 系列方法占用的端口会在主函数调用结束之后自动释放. 如需提前释放, 可以使用 [port-killer](https://github.com/ZingerLittleBee/port-killer-rs)
+> `take_up` 系列方法占用的端口会在主函数调用结束之后自动释放.
 ### `take_up_tcp_port`
 在 tcp 上占用端口
 ```rust

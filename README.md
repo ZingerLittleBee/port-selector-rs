@@ -17,7 +17,7 @@ Language : 🇺🇸 English | [🇨🇳 简体中文](./README.zh-CN.md)
 </div>
 
 ## Overview
-port-selector is a rust library that provides **port availability checking**, **port filtering based on conditions** and  **occupy specified ports**.
+port-selector is a rust library that provides functions to **port availability checking**, **port filtering based on conditions** and  **occupy specified ports**.
 
 ## Installation
 1. Get the latest version -> https://crates.io/crates/port-selector
@@ -28,7 +28,7 @@ port-selector is a rust library that provides **port availability checking**, **
 port-selector = "0.1.6"
 ```
 
-3. use
+3. Usage
 ```rust
 use port_selector::{is_free, Port};
 use port_selector::take_up::{random_take_up_port, take_up_port};
@@ -128,7 +128,7 @@ pub fn select_free_port(selector: Selector) -> Option<Port>
 ```
 
 ----
-> The ports occupied by the `take_up` series of methods will be automatically released after the main function call ends. To release earlier, you can use [port-killer](https://github.com/ZingerLittleBee/port-killer-rs)
+> The ports occupied by the `take_up` series of methods will be automatically released after the main function call ends.
 ### `take_up_tcp_port`
 Occupy port on tcp
 ```rust
