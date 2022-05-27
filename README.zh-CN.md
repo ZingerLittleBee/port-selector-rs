@@ -10,7 +10,7 @@ Language : [🇺🇸 English](./README.md) | 🇨🇳 简体中文
 </div>
 <div align="center">
 
-[![Docs](https://img.shields.io/docsrs/port-selector)](https://docs.rs/port-selector/0.1.1/port_selector/)
+[![Docs](https://img.shields.io/docsrs/port-selector)](https://docs.rs/port-selector/0.1.6/port_selector/)
 [![GitHub Actions CI](https://img.shields.io/github/workflow/status/ZingerLittleBee/port-selector-rs/Test%20CI)](https://github.com/ZingerLittleBee/port-selector-rs/actions)
 [![LICENSE](https://img.shields.io/crates/l/port-selector)](./LICENSE)
 
