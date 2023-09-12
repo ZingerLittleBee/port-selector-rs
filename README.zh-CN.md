@@ -3,16 +3,16 @@ Language : [🇺🇸 English](./README.md) | 🇨🇳 简体中文
 <h1 align="center">port-selector</h1>
 <div align="center">
 
-[![Build Status](https://img.shields.io/crates/v/port-selector)](https://crates.io/crates/port-selector)
-![Crates Downloads](https://img.shields.io/crates/d/port-selector)
-![Last Commit](https://img.shields.io/github/last-commit/ZingerLittleBee/port-selector-rs)
+[![Build Status](https://img.shields.io/crates/v/port-selector?style=for-the-badge)](https://crates.io/crates/port-selector)
+![Crates Downloads](https://img.shields.io/crates/d/port-selector?style=for-the-badge)
+![Last Commit](https://img.shields.io/github/last-commit/ZingerLittleBee/port-selector-rs?style=for-the-badge)
 
 </div>
 <div align="center">
 
-[![Docs](https://img.shields.io/docsrs/port-selector)](https://docs.rs/port-selector/0.1.6/port_selector/)
-[![GitHub Actions CI](https://img.shields.io/github/workflow/status/ZingerLittleBee/port-selector-rs/Test%20CI)](https://github.com/ZingerLittleBee/port-selector-rs/actions)
-[![LICENSE](https://img.shields.io/crates/l/port-selector)](./LICENSE)
+[![Docs](https://img.shields.io/docsrs/port-selector?style=for-the-badge)](https://docs.rs/port-selector/0.1.6/port_selector/)
+[![GitHub Actions CI](https://img.shields.io/github/actions/workflow/status/ZingerLittleBee/port-selector-rs/test.yml?style=for-the-badge)](https://github.com/ZingerLittleBee/port-selector-rs/actions)
+[![LICENSE](https://img.shields.io/crates/l/port-selector?style=for-the-badge)](./LICENSE)
 
 </div>
 
