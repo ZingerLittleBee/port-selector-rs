@@ -184,7 +184,7 @@ mod tests {
         };
         let port = select_free_port(selector_fail);
         println!("selector_fail, port: {:#?}", &port);
-        assert!(!port.is_some());
+        assert!(port.is_none());
 
         let selector: Selector = Selector {
             port_range: (50000, 60000),
@@ -193,7 +193,7 @@ mod tests {
         for i in 0..100 {
             let port = select_free_port(selector);
             println!("index: {}, port: {:#?}", i, &port.unwrap());
-            assert!(&port.unwrap() >= &50000 && &port.unwrap() <= &60000);
+            assert!(port.unwrap() >= 50000 && port.unwrap() <= 60000);
             assert!(port.is_some());
         }
     }

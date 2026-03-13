@@ -114,7 +114,7 @@ mod take_up_tests {
     #[test]
     fn test_random_take_up_tcp_port() {
         let used_tcp_port = random_take_up_tcp_port();
-        assert_eq!(is_free_tcp(used_tcp_port), false);
+        assert!(!is_free_tcp(used_tcp_port));
     }
 
     #[test]
@@ -139,7 +139,7 @@ mod take_up_tests {
         assert!(free_port.is_some());
         let is_used_port = take_up_port(free_port.unwrap());
         assert!(is_used_port);
-        assert_eq!(is_free(free_port.unwrap()), false);
+        assert!(!is_free(free_port.unwrap()));
     }
 
     #[test]
