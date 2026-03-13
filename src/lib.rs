@@ -1,9 +1,10 @@
 pub mod take_up;
 
-use rand::prelude::*;
 use std::net::{
     Ipv4Addr, Ipv6Addr, SocketAddrV4, SocketAddrV6, TcpListener, ToSocketAddrs, UdpSocket,
 };
+
+use rand::RngExt;
 
 pub type Port = u16;
 
@@ -98,25 +99,25 @@ pub fn select_from_given_port(given_port: Port) -> Option<Port> {
 
 /// Gets a matching port based on the `Selector` parameter constraint
 pub fn select_free_port(selector: Selector) -> Option<Port> {
-    let mut rng = rand::thread_rng();
+    let mut rng = rand::rng();
     let (from, to) = selector.port_range;
     if selector.check_tcp && selector.check_udp {
         for _ in 0..selector.max_random_times {
-            let port = rng.gen_range(from..to);
+            let port = rng.random_range(from..to);
             if is_free(port) {
                 return Some(port);
             }
         }
     } else if selector.check_tcp {
         for _ in 0..selector.max_random_times {
-            let port = rng.gen_range(from..to);
+            let port = rng.random_range(from..to);
             if is_free_tcp(port) {
                 return Some(port);
             }
         }
     } else if selector.check_udp {
         for _ in 0..selector.max_random_times {
-            let port = rng.gen_range(from..to);
+            let port = rng.random_range(from..to);
             if is_free_udp(port) {
                 return Some(port);
             }
